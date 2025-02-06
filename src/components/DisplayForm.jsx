@@ -3,7 +3,13 @@ import React, { useState } from "react";
 function DisplayForm() {
     const [present, setPresent] = useState(0)
     const [total, setTotal] = useState(0)
+    const [credit, setCredit] = useState(0)
+
     const [result, setResult] = useState("")
+    const [weeks, setWeeks] = useState("")
+    const [weeksHidden, setWeeksHidden] = useState(false)
+
+
     const calculate = (e) => {
         console.log("Running...")
         e.preventDefault()
@@ -18,13 +24,23 @@ function DisplayForm() {
             return;
         }
 
-        let daysToAttend = 100*present / total 
+        let daysToAttend = 100*present / total
+        let weeksToAttend=0; 
+
+        if(credit===0){
+          console.log(credit)
+          setWeeksHidden(true)
+        }
+
         if(daysToAttend >= 75){
             setResult(`You already have more than 75% attendance (${daysToAttend.toFixed(2)}%)`)
         }
+
         else{
             daysToAttend = 3*total - 4*present
+            weeksToAttend = daysToAttend/credit
             setResult(`You need to attend ${daysToAttend} more days to make 75% attendance`)
+            setWeeks(`Hence , You need to attend ${weeksToAttend} more weeks to make 75% attendance`)
         }
 
         return 0;
@@ -48,6 +64,13 @@ function DisplayForm() {
           className="bg-blue-200 rounded p-3 m-2 outline-none hover:bg-blue-300 shadow-2xl"
         />
 
+        <input
+          type="number"
+          placeholder="Subject Credit"
+          onChange={(e) => setCredit(Number(e.target.value))}
+          className="bg-blue-200 rounded p-3 m-2 outline-none hover:bg-blue-300 shadow-2xl"
+        />
+
         <button
           type="submit"
           className="bg-blue-600 p-3 m-2 rounded-md text-white hover:bg-blue-700"
@@ -59,6 +82,12 @@ function DisplayForm() {
         className="text-black p-3 text-center">
             {result}
         </p>
+
+        <p className={`text-black p-3 text-center ${weeksHidden ? 'hidden' : ''}`}>
+          {weeks}
+        </p>
+
+
       </form>
     </div>
   );

@@ -1,5 +1,7 @@
 # Attendance Calculator 📊
 
+Try out the project - https://11-attendance-calculator.vercel.app/
+
 Attendance Calculator is a simple and efficient web application designed to help students and professionals track their attendance. It calculates the required attendance percentage and helps users determine how many more classes they need to attend or how many they can afford to miss.
 Helps to get attendance record in seconds.
 
